@@ -10,8 +10,9 @@ Welcome to Bakery App's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   requirements
    local-development
+   requirements-bakery
+   requirements-ice-cream-shop
    users
 
 
