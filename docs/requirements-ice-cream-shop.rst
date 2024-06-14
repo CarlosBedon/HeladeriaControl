@@ -32,11 +32,14 @@ Venta Diaria
 
     - El `13/06/2024` (fecha) se vendieron `4` (cantidad) `conos simples` (presentación). 
 
-- Si el desarrollador desea que el usuario no ingrese `manualmente` la fecha, se debe buscar una forma de almanacer la fecha al 
+- Si el desarrollador desea que el usuario no ingrese `manualmente` la fecha, se debe buscar una forma de almacenar la fecha al 
   momento de guardar el registro. 
 
     - Solo se debería asignar la fecha actual a ``fecha`` cuando se **crea** el registro, no se debe modificar cuando se **edita**
       el registro.
+
+- Solo puede existir **un** registro por ``presentacion`` y ``fecha``. Por ejemplo solo puede haber un registro de
+  Cono Simple el 13/10/2024.
 
 
 Registro de Pesos
@@ -53,7 +56,7 @@ Registro de Pesos
   - ``peso_inicial`` y ``peso_final`` se va a almacenar en gramos (y como un número entero positivo).
   - Tanto ``inicial_ingresado_el`` como ``final_ingresado_el`` deben ser obtenido y almacenados automáticamente. 
   - No se puede ingresar ``peso_final`` si ``peso_inicial`` aún no ha sido ingresado. 
-  - Solo puede existir **un** registro por ``sabor`` y ``peso_inicial``. Por ejemplo solo puede haber un registro de
+  - Solo puede existir **un** registro por ``sabor`` y ``inicial_ingresado_el``. Por ejemplo solo puede haber un registro de
     helado de chicle el 13/10/2024.   
 
     - El atributo `unique_for_date <https://docs.djangoproject.com/en/4.2/ref/models/fields/#unique-for-date>`_ puede ser de utilidad
@@ -76,10 +79,7 @@ Dashboard
   - Peso Inicial Total, es la sumatoria del ``peso_inicial`` de todos los sabores 
   - Peso Final Total, es la sumatoria del ``peso_final`` de todos los sabores 
   - Venta Total [en gramos], es la sumatoria de ``VentaDiaria.cantidad * Presentacion.cantidad_helado``. 
-
-    - Recordar que puede haber varios registros de VentaDiaria para una misma fecha
-
-  - +/- (Diferencia), es el resultado de ``uso_helado - venta_total``, donde ``uso_helado``es **Peso Final Total - Peso Inicial Total*
+  - +/- (Diferencia), es el resultado de ``uso_helado - venta_total``, donde ``uso_helado``es **Peso Final Total - Peso Inicial Total**
 
     - Para facilidad visual a esta columna se le va a poner un formato de celda en base a su valor. 
     - Si, ``uso_helado > venta_total`` mostrar celda con background ``bg-danger``
