@@ -1,0 +1,23 @@
+{% extends "baseone.html" %}
+
+<!--#Titulo-->
+{% block title %}
+  Dashboard
+{% endblock title %}
+<!--#Imagenes Fondo-->
+{% block background %}
+  {% load static %}
+
+  {% static 'product/img/dashboard.jpg'
+  %}
+{% endblock background %}
+<!--#Cabeceras-->
+{% block headers %}
+  <h1>Resumen General</h1>
+  <h2>Dashboard</h2>
+{% endblock headers %}
+<!--#Contenido-->
+{% block content %}
+  <h2>Listado de Productos Disponibles</h2>
+  <p>Es el contenido de la portada 2121</p>
+{% endblock content %}

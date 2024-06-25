@@ -1,0 +1,22 @@
+{% extends "baseone.html" %}
+
+<!--#Titulo-->
+{% block title %}
+  Productos y Sabores
+{% endblock title %}
+<!--#Imagenes en la Pantalla-->
+{% block background %}
+  {% load static %}
+
+  {% static 'product/img/VentasDiarias.jpeg' %}
+{% endblock background %}
+<!--#Cabeceras-->
+{% block headers %}
+  <h1>Venta Diaria</h1>
+  <h2>Ventas por App y en Local</h2>
+{% endblock headers %}
+<!--#Contenido-->
+{% block content %}
+  <h2>Instrucciones</h2>
+  <p>Llena el formulario de venta, agrega los datos del cliente en caso denecesitar factura</p>
+{% endblock content %}

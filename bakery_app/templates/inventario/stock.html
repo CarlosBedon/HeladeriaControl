@@ -1,0 +1,25 @@
+{% extends "baseone.html" %}
+
+<!--#Titulo-->
+{% block title %}
+  Productos y Sabores
+{% endblock title %}
+<!--#Imagenes de Pantalla-->
+{% block background %}
+  {% load static %}
+
+  {% static 'product/img/stock.jpg' %}
+{% endblock background %}
+<!--#Cabeceras-->
+{% block headers %}
+  <h1>Inventario</h1>
+  <h2>Cantidad de Helado en Vitrina</h2>
+{% endblock headers %}
+<!--#Contenido-->
+{% block content %}
+  <h2>Instrucciones</h2>
+  <p>
+    El Helado debe ser pesado 2 veces al dia, la primera al iniciar el turno, la
+    segunda al finalizar el turno
+  </p>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "baseone.html" %}
+
+<!--#Titulo-->
+{% block title %}
+  Bienvenidos
+{% endblock title %}
+<!--#Imagenes de Pantalla-->
+{% block background %}
+  {% load static %}
+
+  {% static 'img/bienvenidos.jpg'
+  %}
+{% endblock background %}
+<!--#Cabeceras-->
+{% block headers %}
+  <h1>101 Toppings Heladeria</h1>
+  <h2>Helado 100% de Fruta Natural</h2>
+{% endblock headers %}
+{% include 'includes/acciones_menu.html' %}
+<!--#Contenido-->
