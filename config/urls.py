@@ -7,17 +7,17 @@ from django.views import defaults as default_views
 # from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", include("bakery_app.pages.urls")),
+    path("", include("bakery_app.pages.urls", namespace="inicio")),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("bakery_app.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # APP PATHS
-    path("product/", include("bakery_app.product.urls")),
-    path("inventario/", include("bakery_app.inventario.urls")),
-    path("dashboard/", include("bakery_app.dashboard.urls")),
-    path("venta/", include("bakery_app.venta.urls")),
+    path("product/", include("bakery_app.product.urls", namespace="product")),
+    path("inventario/", include("bakery_app.inventario.urls", namespace="inventario")),
+    path("dashboard/", include("bakery_app.dashboard.urls", namespace="dashboard")),
+    path("venta/", include("bakery_app.venta.urls", namespace="venta")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
