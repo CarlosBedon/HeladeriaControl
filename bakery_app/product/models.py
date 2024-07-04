@@ -19,6 +19,10 @@ class Product(models.Model):
     def __str__(self):
         return self.presentacion
 
+    @property
+    def summary(self):
+        return f"{self.presentacion} (pop. {self.precio})"
+
 
 class Flavours(models.Model):
     # flavour_id = models.Field(primary_key = True, null = False)

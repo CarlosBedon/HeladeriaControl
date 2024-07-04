@@ -67,6 +67,9 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Django Tables
+    "django_tables2",
+    "django_filters",
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
