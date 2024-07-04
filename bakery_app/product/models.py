@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Product(models.Model):
+    # product_id = models.Field(primary_key = True,  null = False)
     presentacion = models.CharField(max_length=200, verbose_name="Tipo de Producto")
     peso = models.PositiveIntegerField(verbose_name="Peso en Gramos")
     precio = models.PositiveIntegerField(verbose_name="Precio", null=True, blank=True)
@@ -20,6 +21,7 @@ class Product(models.Model):
 
 
 class Flavours(models.Model):
+    # flavour_id = models.Field(primary_key = True, null = False)
     sabor = models.CharField(max_length=200, verbose_name="Sabor")
     tipo = models.BooleanField(verbose_name="Tipo de Helado Gelato?", null=False, blank=False)
     stock = models.BooleanField(verbose_name="Sabor en Stock en la tienda?", null=False, blank=False)

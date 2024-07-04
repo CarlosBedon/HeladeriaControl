@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 
-# Create your views here.
-def venta(request):
-    return render(request, "venta/venta.html")
+class VentaPageView(TemplateView):
+    template_name = "venta/venta.html"

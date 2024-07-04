@@ -1,5 +1,5 @@
-from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 
-def product(request):
-    return render(request, "product/products.html")
+class ProductPageView(TemplateView):
+    template_name = "product/products.html"

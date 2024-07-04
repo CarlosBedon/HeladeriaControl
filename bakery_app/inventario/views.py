@@ -1,7 +1,5 @@
-from django.shortcuts import render
-
-# Create your views here.
+from django.views.generic.base import TemplateView
 
 
-def stock(request):
-    return render(request, "inventario/stock.html")
+class InventarioPageView(TemplateView):
+    template_name = "inventario/stock.html"

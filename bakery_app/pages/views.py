@@ -1,10 +1,5 @@
-from django.shortcuts import render
-
-# Create your views here.
+from django.views.generic.base import TemplateView
 
 
-def inicio(request):
-    return render(request, "pages/inicio.html")
-
-
-# Create your views here.
+class InicioPageView(TemplateView):
+    template_name = "pages/inicio.html"
