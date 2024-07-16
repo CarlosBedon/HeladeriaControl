@@ -285,3 +285,6 @@ ACCOUNT_FORMS = {"signup": "bakery_app.users.forms.UserSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+DATETIME_FORMAT = "d/m/y  H:i"
+USE_L10N = False
+USE_TZ = False
