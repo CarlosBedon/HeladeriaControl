@@ -1,0 +1,32 @@
+{% extends "baseone.html" %}
+
+<!--#Titulo-->
+{% block title %}
+  {{ title1 }}
+{% endblock title %}
+<!--#Imagenes en la Pantalla-->
+{% block background %}
+  {% load static %}
+
+  {% static "/img/productos.jpg" %}
+{% endblock background %}
+<!--#Cabeceras-->
+{% block headers %}
+  <h1>Productos y Sabores</h1>
+  <h2>Listado de Servicios de nuestro Local</h2>
+{% endblock headers %}
+<!--#Contenido-->
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h3>Actualizacion de Producto:</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.presentacion|as_crispy_field }}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">{{ form.precio|as_crispy_field }}</div>
+      <div class="form-group col-md-6 mb-0">{{ form.peso|as_crispy_field }}</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+  </form>
+{% endblock content %}

@@ -15,7 +15,6 @@ django-crispy-forms==2.1  # https://github.com/django-crispy-forms/django-crispy
 crispy-bootstrap5==2023.10  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.4.0  # https://github.com/jazzband/django-redis
 
-
 # Django Project Packages
 django-tables2==2.7.0 # https://github.com/jieter/django-tables2
 django-filter==23.5 # https://github.com/carltongibson/django-filter

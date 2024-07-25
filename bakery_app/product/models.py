@@ -5,11 +5,11 @@ from django.db import models
 class Product(models.Model):
     # product_id = models.Field(primary_key = True,  null = False)
     presentacion = models.CharField(max_length=200, verbose_name="Tipo de Producto")
-    peso = models.PositiveIntegerField(verbose_name="Peso en Gramos")
+    peso = models.PositiveIntegerField(verbose_name="Peso")
     precio = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Precio", null=True, blank=True)
     # image = models.ImageField(verbose_name='Imagen', upload_to="projects")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Edicion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Modificado el")
 
     class Meta:
         verbose_name = "Producto"

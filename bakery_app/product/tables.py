@@ -13,3 +13,20 @@ class ProductTable(tables.Table):
     #   summary = tables.Column(order_by=("presentacion", "precio"))
     class Meta:
         model = Product
+
+
+class ProductBootstrapTable(tables.Table):
+    class Meta:
+        model = Product
+        template_name = "django_tables2/bootstrap.html"
+        fields = ("id", "presentacion", "peso", "precio")
+        linkify = ("presentacion", "peso")
+
+
+class ProductBootstrap5Table(tables.Table):
+    Product = tables.Column(linkify=True)
+    #    continent = tables.Column(accessor="country__continent", linkify=True)
+
+    class Meta:
+        model = Product
+        template_name = "django_tables2/bootstrap5.html"

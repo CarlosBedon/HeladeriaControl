@@ -288,3 +288,7 @@ ACCOUNT_FORMS = {"signup": "bakery_app.users.forms.UserSignupForm"}
 DATETIME_FORMAT = "d/m/y  H:i"
 USE_L10N = False
 USE_TZ = False
+
+# TABLES 2
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"
