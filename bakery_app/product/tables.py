@@ -9,10 +9,17 @@ class ProductTable(tables.Table):
     precio = tables.Column()
     created = tables.Column()
     updated = tables.Column()
+    button_edit = tables.TemplateColumn(
+        template_name="product/edit_buttons.html", verbose_name=("Editar"), orderable=False
+    )
+    button_delete = tables.TemplateColumn(
+        template_name="product/delete_buttons.html", verbose_name=("Eliminar"), orderable=False
+    )
 
     #   summary = tables.Column(order_by=("presentacion", "precio"))
     class Meta:
         model = Product
+        exclude = ("created",)
 
 
 class ProductBootstrapTable(tables.Table):

@@ -53,5 +53,5 @@ class ProductUpdate(UpdateView):
     fields = ["presentacion", "precio", "peso"]
     template_name_suffix = "_update_form"
 
-    def get_success_url(self, **kwargs):
-        return reverse_lazy("product:update", args=[self.get_object.id])
+    def get_success_url(self, *args):
+        return reverse_lazy("product:create")

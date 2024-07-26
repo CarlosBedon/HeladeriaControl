@@ -1,0 +1,22 @@
+<style>
+  .button {
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button2 {
+    background-color: #FF0000;
+  }
+</style>
+<a href={% url 'product:create' %}>
+  <button class="button button2">
+    <b>Eliminar</b>
+  </button>
+</a>
