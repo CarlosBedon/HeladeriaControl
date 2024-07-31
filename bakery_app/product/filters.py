@@ -6,4 +6,5 @@ from .models import Product
 class ProductFilter(FilterSet):
     class Meta:
         model = Product
-        fields = {"presentacion": ["exact", "contains"]}
+        # fields = {"presentacion": ["exact", "contains"]}
+        fields = ["presentacion"]

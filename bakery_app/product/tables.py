@@ -1,10 +1,12 @@
 import django_tables2 as tables
+from django_tables2 import Column, Table, TemplateColumn
 
 from .models import Product
 
 
-class ProductTable(tables.Table):
-    presentacion = tables.Column()
+class ProductTable1(tables.Table):
+    id = tables.Column()
+    presentacion = tables.Column(accessor="presentacion", verbose_name="Presentacion")
     peso = tables.Column(verbose_name="Peso Sugerido")
     precio = tables.Column()
     created = tables.Column()
@@ -16,24 +18,23 @@ class ProductTable(tables.Table):
         template_name="product/delete_buttons.html", verbose_name=("Eliminar"), orderable=False
     )
 
-    #   summary = tables.Column(order_by=("presentacion", "precio"))
     class Meta:
         model = Product
         exclude = ("created",)
 
 
-class ProductBootstrapTable(tables.Table):
+class ProductTable(Table):
+    id = Column()
+    presentacion = Column(accessor="presentacion", verbose_name="Presentacion")
+    peso = Column(verbose_name="Peso Sugerido")
+    precio = Column()
+    created = Column()
+    updated = Column()
+    button_edit = TemplateColumn(template_name="product/edit_buttons.html", verbose_name=("Editar"), orderable=False)
+    button_delete = TemplateColumn(
+        template_name="product/delete_buttons.html", verbose_name=("Eliminar"), orderable=False
+    )
+
     class Meta:
         model = Product
-        template_name = "django_tables2/bootstrap.html"
-        fields = ("id", "presentacion", "peso", "precio")
-        linkify = ("presentacion", "peso")
-
-
-class ProductBootstrap5Table(tables.Table):
-    Product = tables.Column(linkify=True)
-    #    continent = tables.Column(accessor="country__continent", linkify=True)
-
-    class Meta:
-        model = Product
-        template_name = "django_tables2/bootstrap5.html"
+        exclude = ("created",)

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render  # get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -8,20 +8,17 @@ from django_filters.views import FilterView
 from django_tables2 import RequestConfig, SingleTableMixin
 
 from .filters import ProductFilter
+from .forms import ProductFilterFormHelper
 
 # from .filters import ProductFilter
 # from .forms import ProductForm
 from .models import Product
-from .tables import ProductTable
+from .tables import ProductTable  # ProductTable1
 
 
 class ProductPageView(TemplateView):
     template_name = "product/products.html"
 
-    #   def get_context_data(self, **kwargs):
-    #       context = super().get_context_data(**kwargs)
-    #       context['title1'] = "Productos"
-    #       return context
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {"title1": "Productos"})
 
@@ -32,12 +29,31 @@ def testTable(request):
     return render(request, "product/products.html", {"table": table})
 
 
-# CLASE PARA FILTROS
 class FilteredProductListView(SingleTableMixin, FilterView):
     table_class = ProductTable
     model = Product
     template_name = "product.html"
     filterset_class = ProductFilter
+
+
+# CLASE PARA FILTROS
+class FilteredSingleTableView(SingleTableMixin, FilterView):
+    formhelper_class = None
+
+    def get_filterset(self, filterset_class):
+        kwargs = self.get_filterset_kwargs(filterset_class)
+        filterset = filterset_class(**kwargs)
+        filterset.form.helper = self.formhelper_class()
+        return filterset
+
+
+# MODEL VIEW
+class ProductView(FilteredSingleTableView):
+    template_name = "product/products.html"
+    table_class = ProductTable
+    paginate_by = 25
+    filterset_class = ProductFilter
+    formhelper_class = ProductFilterFormHelper
 
 
 class ProductCreate(CreateView):
@@ -53,5 +69,8 @@ class ProductUpdate(UpdateView):
     fields = ["presentacion", "precio", "peso"]
     template_name_suffix = "_update_form"
 
-    def get_success_url(self, *args):
-        return reverse_lazy("product:create")
+    def get_success_url(self):
+        return reverse_lazy("product:update", args=[self.object.id]) + "?ok"
+
+    def record(self):
+        return self._record
