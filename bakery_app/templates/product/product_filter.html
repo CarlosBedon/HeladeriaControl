@@ -32,17 +32,12 @@
       display: none;
     }
   </style>
-  <h2 class="section-heading mb-4">
+  <h3 class="section-heading mb-4">
     <span class="section-heading-upper">Productos Heladeria</span>
-  </h2>
+  </h3>
   <section class="page-section about-heading">
     <div class="container-fluid">
       <div class="bg-faded rounded p-5">
-        {% if 'ok' in request.GET %}
-          <h4>
-            <b>CAMBIOS GUARDADOS CORRECTAMENTE </b>
-          </h4>
-        {% endif %}
         <div class="row">
           <div class="col-md-3">Filtro de Busqueda:</div>
           {% if filter %}
@@ -52,6 +47,11 @@
           {% endif %}
         </div>
       </div>
+      {% if 'ok' in request.GET %}
+        <h4>
+          <b>CAMBIOS GUARDADOS CORRECTAMENTE </b>
+        </h4>
+      {% endif %}
       <div class="col-md-30">{% render_table table %}</div>
     </div>
   </section>
