@@ -373,3 +373,39 @@ footer .copyright {
   font-size: 16px;
   padding: 25px 35px;
 }
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 1rem solid rgba(29, 145, 180, 0.2);
+  padding: 10px;
+}
+
+.btn_s {
+  background-color: #2c0ce2; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 210px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn_c {
+  background-color: #dd082b;
+  border: none;
+  color: white;
+  padding: 10px 210px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.filterview {
+  margin: auto;
+  width: 50%;
+  border: 1rem solid rgba(29, 145, 180, 0.2);
+  padding: 10px;
+}

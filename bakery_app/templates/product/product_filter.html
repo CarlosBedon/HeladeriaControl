@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-md-3">Filtro de Busqueda:</div>
           {% if filter %}
-            <form action="" method="get">
+            <form action="" method="get" class="form-group col-md-4 mb-">
               {% crispy filter.form filter.form.helper %}
             </form>
           {% endif %}
