@@ -1,7 +1,7 @@
 from django.shortcuts import render  # get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 # from django.views.generic.list import ListView
 from django_filters.views import FilterView
@@ -72,5 +72,9 @@ class ProductUpdate(UpdateView):
     def get_success_url(self):
         return reverse_lazy("product:product") + "?ok"
 
-    def record(self):
-        return self._record
+
+class ProductDelete(DeleteView):
+    model = Product
+
+    def get_success_url(self):
+        return reverse_lazy("product:product") + "?deleted"

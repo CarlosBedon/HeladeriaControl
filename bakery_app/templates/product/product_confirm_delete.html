@@ -22,7 +22,7 @@
   <div class="center">
     <div class="row">
       <div class="col-md-9">
-        <h4>Agrega el Producto</h4>
+        <h4>Eliminar Producto</h4>
       </div>
       <div class="col-md-3">
         <a href="{% url 'product:product' %}">
@@ -32,12 +32,10 @@
     </div>
     <form method="post">
       {% csrf_token %}
-      <div class="col-lg-12">{{ form.presentacion|as_crispy_field }}</div>
-      <div class="col-lg-12">{{ form.precio|as_crispy_field }}</div>
-      <div class="col-lg-12">{{ form.peso|as_crispy_field }}</div>
-      <div class="col-lg-6">
-        <button type="submit" class="btn_s">Guardar</button>
-      </div>
+      <p>
+        Estas Seguro de eliminar <b>{{ object }}</b>?
+      </p>
+      <input type="submit" value="Si, elimina el producto." />
     </form>
   </div>
 {% endblock content %}
