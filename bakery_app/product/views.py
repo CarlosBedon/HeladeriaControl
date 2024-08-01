@@ -70,7 +70,7 @@ class ProductUpdate(UpdateView):
     template_name_suffix = "_update_form"
 
     def get_success_url(self):
-        return reverse_lazy("product:update", args=[self.object.id]) + "?ok"
+        return reverse_lazy("product:product") + "?ok"
 
     def record(self):
         return self._record

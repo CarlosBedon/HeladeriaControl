@@ -362,26 +362,7 @@ footer .copyright {
   margin-bottom: 0;
   text-align: center;
 }
-.btn {
-  font-size: 14px;
-  font-weight: 800;
-  padding: 15px 25px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border-radius: 0;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-.btn-primary {
-  background-color: #0085a1;
-  border-color: #0085a1;
-}
-.btn-primary:active,
-.btn-primary:focus,
-.btn-primary:hover {
-  color: #fff;
-  background-color: #00657b !important;
-  border-color: #c20d95 !important;
-}
+
 .project {
   padding-top: 40px;
 }
