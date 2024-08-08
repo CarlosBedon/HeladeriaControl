@@ -1,11 +1,7 @@
-from django.shortcuts import render  # get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-
-# from django.views.generic.list import ListView
 from django_filters.views import FilterView
-from django_tables2 import RequestConfig, SingleTableMixin
+from django_tables2 import SingleTableMixin
 
 from .filters import ProductFilter
 from .forms import ProductFilterFormHelper
@@ -14,26 +10,6 @@ from .forms import ProductFilterFormHelper
 # from .forms import ProductForm
 from .models import Product
 from .tables import ProductTable  # ProductTable1
-
-
-class ProductPageView(TemplateView):
-    template_name = "product/products.html"
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {"title1": "Productos"})
-
-
-def testTable(request):
-    table = ProductTable(Product.objects.all(), attrs={"class": "paleblue"}, template_name="django_tables2/table.html")
-    RequestConfig(request, paginate={"per_page": 10}).configure(table)
-    return render(request, "product/products.html", {"table": table})
-
-
-class FilteredProductListView(SingleTableMixin, FilterView):
-    table_class = ProductTable
-    model = Product
-    template_name = "product.html"
-    filterset_class = ProductFilter
 
 
 # CLASE PARA FILTROS
@@ -60,8 +36,6 @@ class ProductCreate(CreateView):
     model = Product
     fields = ["presentacion", "precio", "peso"]
     success_url = reverse_lazy("product:product")
-    # def get_success_url(self, **kwargs):
-    #    return reverse("product:product")
 
 
 class ProductUpdate(UpdateView):

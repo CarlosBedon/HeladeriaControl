@@ -1,6 +1,6 @@
 import pytest
 
-from bakery_app.product.models import Product
+from bakery_app.product.models import Flavours, Product
 
 
 @pytest.mark.django_db
@@ -16,3 +16,16 @@ class Test_Producto:
         assert producto.peso == "200"
         assert float(producto.precio) >= 0.0
         assert int(producto.peso) >= 0
+
+
+@pytest.mark.django_db
+class Test_Flavour:
+    def test_create_flavours(self):
+        flavour = Flavours.objects.create(
+            sabor="Mora",
+            tipo=True,
+            stock=True,
+        )
+        assert flavour.sabor == "Mora"
+        assert flavour.tipo is True
+        assert flavour.stock is True
