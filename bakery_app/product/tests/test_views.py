@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from bakery_app.product.models import Product
+from bakery_app.product.models import Flavours, Product
 
 
 @pytest.mark.django_db
@@ -93,3 +93,94 @@ class TestProductDelete:
         assert "Eliminar Producto" in str(response.content)
         assert "Estas Seguro de eliminar" in str(response.content)
         assert "Yogurt" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestFlavourtView:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            flavour1 = Flavours.objects.create(sabor="Mora", tipo="Sorbetto", stock="EN STOCK")
+            flavour2 = Flavours.objects.create(sabor="Vainilla", tipo="Gelatto", stock="FUERA DE STOCK")
+            return flavour1, flavour2
+
+        return _data_test
+
+    def test_get_flavours(self, client, data_test):
+        data = data_test()
+        # import ipdb
+        # ipdb.set_trace()
+        assert str(data[0]) == "Mora"
+        assert str(data[1]) == "Vainilla"
+        response = client.get(reverse("product:flavour"))
+        assert response.status_code == 200
+        assert "Sorbetto" in str(response.content)
+        assert "FUERA DE STOCK" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestFlavourCreate:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            flavour = Flavours.objects.create(sabor="Mora", tipo="Sorbetto", stock="EN STOCK")
+            return flavour
+
+        return _data_test
+
+    def test_create_flavours(self, client, data_test):
+        data = data_test()
+
+        assert data.sabor == "Mora"
+        response = client.get(reverse("product:flavourCreate"))
+        assert response.status_code == 200
+        assert "Agrega el Sabor" in str(response.content)
+        assert "Sabor" in str(response.content)
+        assert "Stock" in str(response.content)
+        assert "Tipo" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestFlavourtUpdate:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            flavour = Flavours.objects.create(sabor="Mora", tipo="Sorbetto", stock="EN STOCK")
+            return flavour
+
+        return _data_test
+
+    def test_update_update_views(self, client, data_test):
+        data = data_test()
+
+        assert str(data) == "Mora"
+        response = client.get(reverse("product:flavourUpdate", kwargs={"pk": data.pk}))
+        assert response.status_code == 200
+        assert "Actualizacion de Sabor" in str(response.content)
+        assert "Sabor" in str(response.content)
+        assert "Stock" in str(response.content)
+        assert "Tipo" in str(response.content)
+        assert "Mora" in str(response.content)
+        assert "Sorbetto" in str(response.content)
+        assert "EN STOCK" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestFlavourDelete:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            flavour = Flavours.objects.create(sabor="Banana", tipo="Gelatto", stock="FUERA DE STOCK")
+            return flavour
+
+        return _data_test
+
+    def test_delete_flavour_views(self, client, data_test):
+        data = data_test()
+
+        assert str(data) == "Banana"
+        response = client.get(reverse("product:flavourDelete", kwargs={"pk": data.pk}))
+        assert response.status_code == 200
+        assert "Eliminar Sabor" in str(response.content)
+        assert "Estas Seguro de eliminar el Helado Sabor a" in str(response.content)
+        assert "Banana" in str(response.content)
