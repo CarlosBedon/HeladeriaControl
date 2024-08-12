@@ -17,7 +17,8 @@ class TestProductView:
 
     def test_get_products(self, client, data_test):
         data = data_test()
-
+        # import ipdb
+        # ipdb.set_trace()
         assert str(data[0]) == "Waffle"
         assert str(data[1]) == "Cono Doble"
         response = client.get(reverse("product:product"))
@@ -39,9 +40,32 @@ class TestProductCreate:
     def test_create_products(self, client, data_test):
         data = data_test()
 
-        assert str(data[0]) == "Cono Doble"
+        assert data.presentacion == "Cono Doble"
         response = client.get(reverse("product:create"))
         assert response.status_code == 200
+        assert "Agrega el Producto" in str(response.content)
+        assert "Tipo de Producto" in str(response.content)
+        assert "Precio" in str(response.content)
+        assert "Peso" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestProductUpdate:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            product_update = Product.objects.create(presentacion="Yogurt", peso="250", precio="1.00")
+            return product_update
+
+        return _data_test
+
+    def test_update_products_views(self, client, data_test):
+        data = data_test()
+
+        assert str(data) == "Yogurt"
+        response = client.get(reverse("product:update", kwargs={"pk": data.pk}))
+        assert response.status_code == 200
+        assert "Actualizacion de Producto" in str(response.content)
         assert "Tipo de Producto" in str(response.content)
         assert "Precio" in str(response.content)
         assert "Peso" in str(response.content)
