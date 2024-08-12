@@ -69,3 +69,27 @@ class TestProductUpdate:
         assert "Tipo de Producto" in str(response.content)
         assert "Precio" in str(response.content)
         assert "Peso" in str(response.content)
+        assert "250" in str(response.content)
+        assert "1.00" in str(response.content)
+        assert "Yogurt" in str(response.content)
+
+
+@pytest.mark.django_db
+class TestProductDelete:
+    @pytest.fixture
+    def data_test(self):
+        def _data_test():
+            product_delete = Product.objects.create(presentacion="Yogurt", peso="250", precio="1.00")
+            return product_delete
+
+        return _data_test
+
+    def test_delete_products_views(self, client, data_test):
+        data = data_test()
+
+        assert str(data) == "Yogurt"
+        response = client.get(reverse("product:delete", kwargs={"pk": data.pk}))
+        assert response.status_code == 200
+        assert "Eliminar Producto" in str(response.content)
+        assert "Estas Seguro de eliminar" in str(response.content)
+        assert "Yogurt" in str(response.content)
