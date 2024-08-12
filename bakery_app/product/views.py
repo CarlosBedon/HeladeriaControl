@@ -63,3 +63,19 @@ class FlavourCreate(CreateView):
     model = Flavours
     fields = ["sabor", "tipo", "stock"]
     success_url = reverse_lazy("product:flavour")
+
+
+class FlavourUpdate(UpdateView):
+    model = Flavours
+    fields = ["sabor", "tipo", "stock"]
+    template_name_suffix = "_update_form"
+
+    def get_success_url(self):
+        return reverse_lazy("product:flavour") + "?ok"
+
+
+class FlavourDelete(DeleteView):
+    model = Flavours
+
+    def get_success_url(self):
+        return reverse_lazy("product:flavour") + "?deleted"
