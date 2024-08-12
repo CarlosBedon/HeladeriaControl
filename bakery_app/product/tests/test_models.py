@@ -11,7 +11,7 @@ class Test_Producto:
         producto = Product.objects.create(
             presentacion="Cono Simple",
             peso="200",
-            precio="-1.20",
+            precio="1.20",
         )
 
         assert producto.presentacion == "Cono Simple"
@@ -29,7 +29,7 @@ class Test_Producto:
             peso="200",
             precio="1.20",
         )
-        assert producto.precio >= 0.0
+        assert float(producto.precio) >= 0.0
 
         # with pytest.raise()
 
