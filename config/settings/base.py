@@ -74,6 +74,7 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
     "django_htmx",  # HTMX REQUISITOS
+    "multiselectfield",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",

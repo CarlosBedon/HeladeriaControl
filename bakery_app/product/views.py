@@ -3,10 +3,10 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 
-from .filters import ProductFilter
-from .forms import ProductFilterFormHelper
-from .models import Product
-from .tables import ProductTable  # ProductTable1
+from .filters import FlavourFilter, ProductFilter
+from .forms import FlavourFilterFormHelper, ProductFilterFormHelper
+from .models import Flavours, Product
+from .tables import FlavoursTable, ProductTable
 
 
 # CLASE PARA FILTROS
@@ -49,3 +49,17 @@ class ProductDelete(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy("product:product") + "?deleted"
+
+
+class FlavourView(FilteredSingleTableView):
+    template_name = "product/flavours.html"
+    table_class = FlavoursTable
+    paginate_by = 25
+    filterset_class = FlavourFilter
+    formhelper_class = FlavourFilterFormHelper
+
+
+class FlavourCreate(CreateView):
+    model = Flavours
+    fields = ["sabor", "tipo", "stock"]
+    success_url = reverse_lazy("product:flavour")

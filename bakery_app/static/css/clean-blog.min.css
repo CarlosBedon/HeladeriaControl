@@ -409,3 +409,7 @@ footer .copyright {
   border: 1rem solid rgba(29, 145, 180, 0.2);
   padding: 10px;
 }
+
+.selected {
+  color: #b61fa2;
+}

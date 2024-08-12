@@ -1,6 +1,6 @@
 from django_filters import FilterSet
 
-from .models import Product
+from .models import Flavours, Product
 
 
 class ProductFilter(FilterSet):
@@ -9,4 +9,11 @@ class ProductFilter(FilterSet):
         fields = {
             "presentacion": ["exact", "contains"],
         }
-        # fields = ["presentacion"]
+
+
+class FlavourFilter(FilterSet):
+    class Meta:
+        model = Flavours
+        fields = {
+            "sabor": ["exact", "contains"],
+        }

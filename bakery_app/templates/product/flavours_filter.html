@@ -13,7 +13,7 @@
 <!--#Cabeceras-->
 {% block headers %}
   <h1>Productos y Sabores</h1>
-  <h2>Tipos de Productos</h2>
+  <h2>Sabores de Helado</h2>
 {% endblock headers %}
 <!--#Contenido-->
 {% load django_tables2 %}
@@ -33,9 +33,9 @@
     }
   </style>
   <h3 class="section-heading mb-4">
-    <span class="section-heading-upper selected">Productos Heladeria</span>
+    <span class="section-heading-upper"><a href="{% url 'product:product' %}">Productos Heladeria</a></span>
     <span class="section-heading-upper">|</span>
-    <span class="section-heading-upper"><a href="{% url 'product:flavour' %}">Sabores de Helados</a></span>
+    <span class="section-heading-upper selected">Sabores de Helados</span>
   </h3>
   <section class="page-section about-heading">
     <div class="container-fluid">

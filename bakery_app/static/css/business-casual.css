@@ -60,6 +60,18 @@ p {
   padding-bottom: 0.5rem;
 }
 
+.selected {
+  color: #df902a;
+}
+
+.section-heading-upper-selected {
+  color: #df902a;
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  padding-bottom: 0.5rem;
+}
+
 .section-heading .section-heading-lower {
   display: block;
   font-size: 3rem;

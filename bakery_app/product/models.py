@@ -35,10 +35,17 @@ class Product(models.Model):
 
 
 class Flavours(models.Model):
-    # flavour_id = models.Field(primary_key = True, null = False)
     sabor = models.CharField(max_length=200, verbose_name="Sabor")
-    tipo = models.BooleanField(verbose_name="Tipo de Helado Gelato?", null=False, blank=False)
-    stock = models.BooleanField(verbose_name="Sabor en Stock en la tienda?", null=False, blank=False)
+    TYPE_ICE_CREAM = (
+        ("1", "Gelatto"),
+        ("2", "Sorbetto"),
+    )
+    tipo = models.CharField(max_length=200, verbose_name="Tipo", choices=TYPE_ICE_CREAM)
+    STOCK_FLAVOUR = (
+        ("1", "EN STOCK"),
+        ("2", "FUERA DE STOCK"),
+    )
+    stock = models.CharField(verbose_name="Stock", null=False, blank=False, choices=STOCK_FLAVOUR)
     # image = models.ImageField(verbose_name='Imagen', upload_to="projects")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Edicion")
