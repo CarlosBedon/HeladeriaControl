@@ -5,9 +5,6 @@ from django_tables2 import SingleTableMixin
 
 from .filters import ProductFilter
 from .forms import ProductFilterFormHelper
-
-# from .filters import ProductFilter
-# from .forms import ProductForm
 from .models import Product
 from .tables import ProductTable  # ProductTable1
 
