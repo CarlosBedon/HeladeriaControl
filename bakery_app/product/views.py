@@ -1,3 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# from django.http.response import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
@@ -8,8 +12,16 @@ from .forms import FlavourFilterFormHelper, FlavourForm, ProductFilterFormHelper
 from .models import Flavours, Product
 from .tables import FlavoursTable, ProductTable
 
+# from django.http import HttpRequest
 
-# CLASE PARA FILTROS
+
+class StaffRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect(reverse_lazy("admin:login"))
+        return super().dispatch(request, *args, **kwargs)
+
+
 class FilteredSingleTableView(SingleTableMixin, FilterView):
     """
     A view that combines table rendering with filtering capabilities.
@@ -70,58 +82,13 @@ class ProductView(FilteredSingleTableView):
     formhelper_class = ProductFilterFormHelper
 
 
-class ProductCreate(CreateView):
-    """
-    A view for creating a new product.
-
-    This class extends `CreateView` to provide a form for creating a new `Product` instance.
-    It handles the creation process and redirects to a specified URL upon successful creation.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Product`.
-    fields : list of str
-        The fields of the `Product` model that should be included in the form. Includes:
-        - "presentacion"
-        - "precio"
-        - "peso"
-    success_url : str
-        The URL to redirect to upon successful form submission. Set to the URL pattern named "product:product".
-    """
-
+class ProductCreate(StaffRequiredMixin, LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("product:product")
 
 
-class ProductUpdate(UpdateView):
-    """
-    A view for updating an existing product.
-
-    This class extends `UpdateView` to provide a form for updating an existing `Product` instance.
-    It allows users to modify specified fields and uses a template with a suffix to render the form.
-    Upon successful form submission, it redirects to a specified URL with a query parameter.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Product`.
-    fields : list of str
-        The fields of the `Product` model that should be included in the form. Includes:
-        - "presentacion"
-        - "precio"
-        - "peso"
-    template_name_suffix : str
-        The suffix to append to the default template name to determine the template used for rendering.
-        Defaults to "_update_form", resulting in a template name like "product/product_update_form.html".
-
-    Methods
-    -------
-    get_success_url()
-        Returns the URL to redirect to upon successful form submission, with a query parameter `?ok`.
-    """
-
+class ProductUpdate(StaffRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name_suffix = "_update_form"
@@ -141,32 +108,12 @@ class ProductUpdate(UpdateView):
         return reverse_lazy("product:product") + "?ok"
 
 
-class ProductDelete(DeleteView):
-    """
-    A view for deleting an existing product.
-
-    This class extends `DeleteView` to handle the deletion of a `Product` instance.
-    Upon successful deletion, it redirects to a specified URL with a query parameter.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Product`.
-
-    Methods
-    -------
-    get_success_url()
-        Returns the URL to redirect to upon successful deletion, with a query parameter `?deleted`.
-    """
-
+class ProductDelete(StaffRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Product
 
     def get_success_url(self):
         """
         Returns the URL to redirect to upon successful deletion of a product.
-
-        This method appends a query parameter `?deleted` to the URL of the view named `"product:product"`,
-        indicating that the deletion was successful.
 
         Returns
         -------
@@ -206,58 +153,13 @@ class FlavourView(FilteredSingleTableView):
     formhelper_class = FlavourFilterFormHelper
 
 
-class FlavourCreate(CreateView):
-    """
-    A view for creating a new flavour.
-
-    This class extends `CreateView` to provide a form for creating a new `Flavours` instance.
-    It handles the creation process and redirects to a specified URL upon successful creation.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Flavours`.
-    fields : list of str
-        The fields of the `Flavours` model that should be included in the form. Includes:
-        - "sabor"
-        - "tipo"
-        - "stock"
-    success_url : str
-        The URL to redirect to upon successful form submission. Set to the URL pattern named "product:flavour".
-    """
-
+class FlavourCreate(StaffRequiredMixin, LoginRequiredMixin, CreateView):
     model = Flavours
     form_class = FlavourForm
     success_url = reverse_lazy("product:flavour")
 
 
-class FlavourUpdate(UpdateView):
-    """
-    A view for updating an existing flavour.
-
-    This class extends `UpdateView` to provide a form for updating an existing `Flavours` instance.
-    It allows users to modify specified fields and uses a template with a suffix to render the form.
-    Upon successful form submission, it redirects to a specified URL with a query parameter.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Flavours`.
-    fields : list of str
-        The fields of the `Flavours` model that should be included in the form. Includes:
-        - "sabor"
-        - "tipo"
-        - "stock"
-    template_name_suffix : str
-        The suffix to append to the default template name to determine the template used for rendering.
-        Defaults to "_update_form", resulting in a template name like "flavours/flavour_update_form.html".
-
-    Methods
-    -------
-    get_success_url()
-        Returns the URL to redirect to upon successful form submission, with a query parameter `?ok`.
-    """
-
+class FlavourUpdate(StaffRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Flavours
     form_class = FlavourForm
     template_name_suffix = "_update_form"
@@ -265,9 +167,6 @@ class FlavourUpdate(UpdateView):
     def get_success_url(self):
         """
         Returns the URL to redirect to upon successful update of a flavour.
-
-        This method appends a query parameter `?ok` to the URL of the view named `"product:flavour"`,
-        indicating successful completion of the update.
 
         Returns
         -------
@@ -277,32 +176,12 @@ class FlavourUpdate(UpdateView):
         return reverse_lazy("product:flavour") + "?ok"
 
 
-class FlavourDelete(DeleteView):
-    """
-    A view for deleting an existing flavour.
-
-    This class extends `DeleteView` to handle the deletion of a `Flavours` instance.
-    Upon successful deletion, it redirects to a specified URL with a query parameter to indicate success.
-
-    Attributes
-    ----------
-    model : type
-        The model class associated with this view. Must be `Flavours`.
-
-    Methods
-    -------
-    get_success_url()
-        Returns the URL to redirect to upon successful deletion, with a query parameter `?deleted`.
-    """
-
+class FlavourDelete(StaffRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Flavours
 
     def get_success_url(self):
         """
         Returns the URL to redirect to upon successful deletion of a flavour.
-
-        This method appends a query parameter `?deleted` to the URL of the view named `"product:flavour"`,
-        indicating that the deletion was successful.
 
         Returns
         -------
