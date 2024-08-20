@@ -1,6 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-# from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -11,8 +9,6 @@ from .filters import FlavourFilter, ProductFilter
 from .forms import FlavourFilterFormHelper, FlavourForm, ProductFilterFormHelper, ProductForm
 from .models import Flavours, Product
 from .tables import FlavoursTable, ProductTable
-
-# from django.http import HttpRequest
 
 
 class StaffRequiredMixin:
