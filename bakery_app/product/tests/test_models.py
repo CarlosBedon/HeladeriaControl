@@ -19,8 +19,6 @@ class Test_Producto:
         assert producto.peso == "200"
         assert float(producto.precio) >= 0.0
         assert int(producto.peso) >= 0
-        # import ipdb
-        # ipdb.set_trace()
         assert producto.created.date() == datetime.datetime.now().date()
 
     def test_create_product_positive_price_show_raisen_error(self):
