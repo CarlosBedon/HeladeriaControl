@@ -4,7 +4,7 @@ from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 
 from .filters import FlavourFilter, ProductFilter
-from .forms import FlavourFilterFormHelper, ProductFilterFormHelper
+from .forms import FlavourFilterFormHelper, FlavourForm, ProductFilterFormHelper, ProductForm
 from .models import Flavours, Product
 from .tables import FlavoursTable, ProductTable
 
@@ -91,7 +91,7 @@ class ProductCreate(CreateView):
     """
 
     model = Product
-    fields = ["presentacion", "precio", "peso"]
+    form_class = ProductForm
     success_url = reverse_lazy("product:product")
 
 
@@ -123,7 +123,7 @@ class ProductUpdate(UpdateView):
     """
 
     model = Product
-    fields = ["presentacion", "precio", "peso"]
+    form_class = ProductForm
     template_name_suffix = "_update_form"
 
     def get_success_url(self):
@@ -227,7 +227,7 @@ class FlavourCreate(CreateView):
     """
 
     model = Flavours
-    fields = ["sabor", "tipo", "stock"]
+    form_class = FlavourForm
     success_url = reverse_lazy("product:flavour")
 
 
@@ -259,7 +259,7 @@ class FlavourUpdate(UpdateView):
     """
 
     model = Flavours
-    fields = ["sabor", "tipo", "stock"]
+    form_class = FlavourForm
     template_name_suffix = "_update_form"
 
     def get_success_url(self):
