@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (  # ProductPageView,FilteredProductListView,
+from .views import (
     FlavourCreate,
     FlavourDelete,
     FlavourUpdate,
@@ -13,14 +13,12 @@ from .views import (  # ProductPageView,FilteredProductListView,
 
 app_name = "product"
 urlpatterns = [
-    # path("", FilteredProductListView.as_view(), name="product"),
     path("create/", ProductCreate.as_view(), name="create"),
     path("update/<int:pk>/", ProductUpdate.as_view(), name="update"),
     path("delete/<int:pk>/", ProductDelete.as_view(), name="delete"),
     path("", ProductView.as_view(), name="product"),
-    # FlavoursURLS
     path("flavour", FlavourView.as_view(), name="flavour"),
-    path("flavourCreate/", FlavourCreate.as_view(), name="flavourCreate"),
-    path("flavourUpdate/<int:pk>/", FlavourUpdate.as_view(), name="flavourUpdate"),
-    path("flavourDelete/<int:pk>/", FlavourDelete.as_view(), name="flavourDelete"),
+    path("flavour/create/", FlavourCreate.as_view(), name="flavourCreate"),
+    path("flavour/update/<int:pk>/", FlavourUpdate.as_view(), name="flavourUpdate"),
+    path("flavour/delete/<int:pk>/", FlavourDelete.as_view(), name="flavourDelete"),
 ]

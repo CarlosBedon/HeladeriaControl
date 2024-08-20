@@ -6,7 +6,24 @@ from django.db import models
 
 # Create your models here.
 class Product(models.Model):
-    # product_id = models.Field(primary_key = True,  null = False)
+    """
+    Represents a product in the inventory.
+
+    Attributes
+    ----------
+    presentacion : CharField
+        The type or presentation of the product, with a maximum length of 200 characters.
+    peso : PositiveIntegerField
+        The weight of the product, stored as a positive integer.
+    precio : DecimalField, optional
+        The price of the product, with a maximum of 6 digits in total and 2 decimal places.
+        Can be null or blank, and has a minimum value validator set to 0.00.
+    created : DateTimeField
+        The date and time when the product was created, automatically set on creation.
+    updated : DateTimeField
+        The date and time when the product was last updated, automatically updated on save.
+    """
+
     presentacion = models.CharField(max_length=200, verbose_name="Tipo de Producto")
     peso = models.PositiveIntegerField(verbose_name="Peso")
     precio = models.DecimalField(
@@ -35,6 +52,29 @@ class Product(models.Model):
 
 
 class Flavours(models.Model):
+    """
+    Represents a flavour of ice cream.
+
+    Attributes
+    ----------
+    sabor : CharField
+        The taste or flavour of the ice cream, with a maximum length of 200 characters.
+    tipo : CharField
+        The type of ice cream, chosen from predefined options (e.g., Gelatto or Sorbetto).
+        Options include:
+        - "1" for Gelatto
+        - "2" for Sorbetto
+    stock : CharField
+        The stock status of the flavour, chosen from predefined options (e.g., in stock or out of stock).
+        Options include:
+        - "1" for EN STOCK
+        - "2" for FUERA DE STOCK
+    created : DateTimeField
+        The date and time when the flavour was created, automatically set on creation.
+    updated : DateTimeField
+        The date and time when the flavour was last updated, automatically updated on save.
+    """
+
     sabor = models.CharField(max_length=200, verbose_name="Sabor")
     TYPE_ICE_CREAM = (
         ("1", "Gelatto"),
