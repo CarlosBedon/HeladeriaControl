@@ -78,13 +78,17 @@ class ProductView(FilteredSingleTableView):
     formhelper_class = ProductFilterFormHelper
 
 
-class ProductCreate(StaffRequiredMixin, LoginRequiredMixin, CreateView):
+class ProductCreate(CreateView, LoginRequiredMixin, StaffRequiredMixin):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("product:product")
 
 
-class ProductUpdate(StaffRequiredMixin, LoginRequiredMixin, UpdateView):
+class ProductUpdate(
+    UpdateView,
+    StaffRequiredMixin,
+    LoginRequiredMixin,
+):
     model = Product
     form_class = ProductForm
     template_name_suffix = "_update_form"
@@ -104,7 +108,7 @@ class ProductUpdate(StaffRequiredMixin, LoginRequiredMixin, UpdateView):
         return reverse_lazy("product:product") + "?ok"
 
 
-class ProductDelete(StaffRequiredMixin, LoginRequiredMixin, DeleteView):
+class ProductDelete(DeleteView, StaffRequiredMixin, LoginRequiredMixin):
     model = Product
 
     def get_success_url(self):

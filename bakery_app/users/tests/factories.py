@@ -1,6 +1,7 @@
 from collections.abc import Sequence
 from typing import Any
 
+# import pytest
 from django.contrib.auth import get_user_model
 from factory import Faker, post_generation
 from factory.django import DjangoModelFactory
@@ -17,7 +18,7 @@ class UserFactory(DjangoModelFactory):
             if extracted
             else Faker(
                 "password",
-                length=42,
+                length=10,
                 special_chars=True,
                 digits=True,
                 upper_case=True,

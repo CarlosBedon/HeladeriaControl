@@ -1,5 +1,10 @@
-{% extends "base.html" %}
+{% extends "baseone.html" %}
 
+{% block background %}
+  {% load static %}
+
+  {% static '/img/stock.jpg' %}
+{% endblock background %}
 {% block title %}
   {% block head_title %}
   {% endblock head_title %}
