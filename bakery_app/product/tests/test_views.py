@@ -1,4 +1,6 @@
 import pytest
+
+# from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
 
 from bakery_app.product.models import Flavours, Product
