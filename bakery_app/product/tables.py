@@ -1,13 +1,13 @@
 # import django_tables2 as tables
 from django_tables2 import Column, Table, TemplateColumn
 
-from .models import Flavours, Product
+from .models import FlavoursIceCream, MenuHeladeria
 
 
 class ProductTable(Table):
     id = Column()
-    presentacion = Column(accessor="presentacion", verbose_name="Presentacion")
-    peso = Column(verbose_name="Peso Sugerido")
+    productos_menu = Column(accessor="productos_menu", verbose_name="Productos del Menu")
+    peso_en_helado = Column(verbose_name="Peso de la Bola de Helado")
     precio = Column()
     created = Column()
     updated = Column()
@@ -17,13 +17,13 @@ class ProductTable(Table):
     )
 
     class Meta:
-        model = Product
+        model = MenuHeladeria
         exclude = ("created",)
 
 
 class FlavoursTable(Table):
     id = Column()
-    sabor = Column(accessor="sabor", verbose_name="Sabor")
+    flavour_name = Column(accessor="flavour_name", verbose_name="Sabor de Helado")
     tipo = Column(verbose_name="Tipo")
     stock = Column(verbose_name="Stock")
     created = Column()
@@ -36,5 +36,5 @@ class FlavoursTable(Table):
     )
 
     class Meta:
-        model = Flavours
+        model = FlavoursIceCream
         exclude = ("created", "updated")

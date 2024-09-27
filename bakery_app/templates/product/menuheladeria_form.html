@@ -19,18 +19,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="center">
-    <div class="row">
-      <div class="col-md-9">
-        <h4>Agrega el Producto</h4>
-      </div>
-      <div class="col-md-3">
-        <a href="{% url 'product:product' %}">
-          <button class="btn ">Cancelar</button>
-        </a>
-      </div>
-    </div>
+  <div class="modal-content">
     {% csrf_token %}
-    {% crispy form %}
+    <div class="modal-header">
+      <h4>Agrega el Producto</h4>
+    </div>
+    <div class="modal-body">{% crispy form %}</div>
+    <div class="modal-footer">
+      <a href="{% url 'product:product' %}">
+        <button class="btn ">Cancelar</button>
+      </a>
+    </div>
   </div>
 {% endblock content %}

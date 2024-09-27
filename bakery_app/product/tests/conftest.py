@@ -1,6 +1,13 @@
-# from pytest_factoryboy import register
+import pytest
 
-# from factories import UserFactory
+from bakery_app.product.tests.factories import FlavourFactory, ProductFactory
 
 
-# register(UserFactory)  # name of fixture is user_factory
+@pytest.fixture
+def products_create():
+    return ProductFactory.create_batch(5)
+
+
+@pytest.fixture
+def flavours_create():
+    return FlavourFactory.create_batch(5)

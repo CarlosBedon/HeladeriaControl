@@ -13,7 +13,7 @@
 <!--#Cabeceras-->
 {% block headers %}
   <h1>Productos y Sabores</h1>
-  <h2>Listado de Servicios de nuestro Local</h2>
+  <h2>Listado de Sabores de Helado</h2>
 {% endblock headers %}
 <!--#Contenido-->
 {% load crispy_forms_tags %}
@@ -22,15 +22,14 @@
   <div class="center">
     <div class="row">
       <div class="col-md-9">
-        <h4>Actualizacion de Producto</h4>
+        <h4>Agrega el Sabor</h4>
       </div>
       <div class="col-md-3">
-        <a href="{% url 'product:product' %}">
+        <a href="{% url 'product:flavour' %}">
           <button class="btn ">Cancelar</button>
         </a>
       </div>
+      <div>{% crispy form %}</div>
     </div>
-    {% csrf_token %}
-    {% crispy form %}
   </div>
 {% endblock content %}

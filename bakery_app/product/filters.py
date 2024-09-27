@@ -1,19 +1,19 @@
 from django_filters import FilterSet
 
-from .models import Flavours, Product
+from .models import FlavoursIceCream, MenuHeladeria
 
 
 class ProductFilter(FilterSet):
     class Meta:
-        model = Product
+        model = MenuHeladeria
         fields = {
-            "presentacion": ["exact", "contains"],
+            "productos_menu": ["exact"],
         }
 
 
 class FlavourFilter(FilterSet):
     class Meta:
-        model = Flavours
+        model = FlavoursIceCream
         fields = {
-            "sabor": ["exact", "contains"],
+            "flavour_name": ["exact"],
         }
