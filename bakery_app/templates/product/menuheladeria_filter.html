@@ -61,7 +61,7 @@
                   aria-label="Close"></button>
         </div>
       {% endif %}
-      <div class="col-md-30">{% render_table table %}</div>
+      <div id="table-container" class="col-md-30">{% render_table table %}</div>
       <button type="button" hx-get="{% url 'product:create' %}" hx-target="#dialog">Create Menu Product</button>
     </section>
   {% endblock content %}
