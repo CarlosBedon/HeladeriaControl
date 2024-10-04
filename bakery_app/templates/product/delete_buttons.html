@@ -1,4 +1,6 @@
-<a href="{% url 'product:delete' record.pk %}">
+<a hx-delete="{% url 'product:delete' record.pk %}"
+   hx-confirm="Deseas Eliminar record.pk?"
+   hx-target="#dialog">
   <button class="btn btn-danger">
     <b>Eliminar </b>
   </button>

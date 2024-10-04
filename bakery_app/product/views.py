@@ -46,7 +46,7 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponse(status=204)
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
 
 class ProductUpdate(
@@ -68,8 +68,8 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
     login_url = "/admin/login/"
     model = MenuHeladeria
 
-    def get_success_url(self):
-        return reverse_lazy("product:product") + "?deleted"
+    def form_valid(self, form):
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
 
 class FlavourView(FilteredSingleTableView):
@@ -92,6 +92,10 @@ class FlavourCreate(LoginRequiredMixin, CreateView):
     model = FlavoursIceCream
     form_class = FlavourForm
     success_url = reverse_lazy("product:flavour")
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
 
 class FlavourUpdate(LoginRequiredMixin, UpdateView):

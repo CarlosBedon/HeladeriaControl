@@ -1,18 +1,14 @@
-<!--#Contenido-->
 {% load crispy_forms_tags %}
 
 {% block content %}
+  {% csrf_token %}
   <div class="modal-content">
     <div class="modal-header">
-      <h4>ELIMINAR PRODUCTO</h4>
+      <h4>Agrega el Sabor de Helado</h4>
     </div>
     <div class="modal-body">
-      <form hx-post="{% url 'product:delete' object.pk %}">
-        {% csrf_token %}
-        <p>
-          Estas Seguro de eliminar <b>{{ object }}</b>?
-        </p>
-        <button type="submit" class="btn btn-danger" value="Confirm">Confirmar</button>
+      <form hx-post="{% url 'product:flavourCreate' %}">
+        {% crispy form %}
       </form>
     </div>
     <div class="modal-footer">

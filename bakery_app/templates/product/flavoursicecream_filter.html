@@ -50,7 +50,11 @@
         <div class="row">
           <div class="col-md-3">Filtro de Busqueda:</div>
           {% if filter %}
-            <form class="form-group col-md-4 mb-">
+            <form hx-get="{% url 'product:flavour' %}"
+                  hx-trigger="update_table from:body, submit"
+                  hx-target="#table-container"
+                  hx-swap="outerHTML"
+                  class="form-group col-md-4 mb-">
               {% crispy filter.form filter.form.helper %}
             </form>
           {% endif %}
@@ -61,7 +65,7 @@
           <b>CAMBIOS GUARDADOS CORRECTAMENTE </b>
         </h4>
       {% endif %}
-      <div class="col-md-30">{% render_table table %}</div>
+      <div id="table-container" class="col-md-30">{% render_table table %}</div>
     </div>
   </section>
 {% endblock content %}
