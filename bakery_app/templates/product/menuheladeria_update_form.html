@@ -7,7 +7,7 @@
       <h4>Editar el Producto al Menu</h4>
     </div>
     <div class="modal-body">
-      <form method="post" hx-post="{% url 'product:update' record.pk %}">
+      <form method="post" hx-post="{% url 'product:update' object.pk %}">
         {% crispy form %}
       </form>
     </div>

@@ -51,6 +51,7 @@
           <div class="col-md-3">Filtro de Busqueda:</div>
           {% if filter %}
             <form hx-get="{% url 'product:product' %}"
+                  hx-trigger="update_table from:body, submit"
                   hx-target="#table-container"
                   hx-swap="outerHTML"
                   class="form-group col-md-4 mb-">

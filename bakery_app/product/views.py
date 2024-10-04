@@ -1,9 +1,8 @@
-# from django.contrib.admin.views.decorators import staff_member_required
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-
-# from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
@@ -60,8 +59,9 @@ class ProductUpdate(
     form_class = ProductForm
     template_name_suffix = "_update_form"
 
-    def get_success_url(self):
-        return reverse_lazy("product:product") + "?ok"
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
 
 class ProductDelete(LoginRequiredMixin, DeleteView):
