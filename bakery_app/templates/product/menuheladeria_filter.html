@@ -22,7 +22,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  {% include 'product/includes/acciones_menu.html' %}
   <style>
     .errorlist {
       color: red;
@@ -32,13 +31,21 @@
       display: none;
     }
   </style>
+  <button class="btn btn-success"
+          type="button"
+          hx-get="{% url 'product:create' %}"
+          hx-target="#dialog">Crear Producto</button>
+  <button class="btn btn-success "
+          type="button"
+          hx-get="{% url 'product:flavourCreate' %}"
+          hx-target="#dialog">Crear Sabor</button>
   <h3 class="section-heading mb-4">
     <span class="section-heading-upper selected">Productos Heladeria</span>
     <span class="section-heading-upper">|</span>
     <span class="section-heading-upper"><a href="{% url 'product:flavour' %}">Sabores de Helados</a></span>
   </h3>
   <section class="page-section about-heading">
-    <div class="container-fluid  >
+    <div class="container-fluid">
       <div class="bg-faded rounded p-5">
         <div class="row">
           <div class="col-md-3">Filtro de Busqueda:</div>
@@ -62,6 +69,6 @@
         </div>
       {% endif %}
       <div id="table-container" class="col-md-30">{% render_table table %}</div>
-      <button type="button" hx-get="{% url 'product:create' %}" hx-target="#dialog">Create Menu Product</button>
-    </section>
-  {% endblock content %}
+    </div>
+  </section>
+{% endblock content %}

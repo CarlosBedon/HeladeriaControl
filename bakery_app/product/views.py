@@ -1,5 +1,6 @@
 # from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 
 # from django.utils.decorators import method_decorator
@@ -43,6 +44,10 @@ class ProductCreate(LoginRequiredMixin, CreateView):
     model = MenuHeladeria
     form_class = ProductForm
     success_url = reverse_lazy("product:product")
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(status=204)
 
 
 class ProductUpdate(

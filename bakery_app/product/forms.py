@@ -23,8 +23,6 @@ class ProductForm(forms.ModelForm):
                 Column("precio", css_class="form-group col-md-6 mb-0"),
                 css_class="form-row",
             ),
-            "updated",
-            "created",
         )
 
 
