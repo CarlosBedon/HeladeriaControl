@@ -24,6 +24,11 @@ def create_menu_producto_factory_name():
 
 
 @pytest.fixture
+def create_3_menu_producto_factory_name():
+    return ProductosMenuFactory.create_batch(3)
+
+
+@pytest.fixture
 def params_menu_products(create_menu_producto_factory_name):
     parametros = {
         "productos_menu": create_menu_producto_factory_name.pk,
