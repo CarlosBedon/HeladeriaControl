@@ -55,11 +55,6 @@ class ProductCreate(LoginRequiredMixin, SaveMixin, CreateView):
     model = MenuHeladeria
     form_class = ProductForm
 
-    def form_invalid(self, form):
-        print(form.errors)
-        response = super().form_invalid(form)
-        return response
-
 
 class ProductUpdate(
     LoginRequiredMixin,
@@ -72,15 +67,15 @@ class ProductUpdate(
     form_class = ProductForm
     template_name_suffix = "_update_form"
 
-    def form_invalid(self, form):
-        print(form.errors)
-        response = super().form_invalid(form)
-        return response
-
 
 class ProductDelete(DeleteMixin, DeleteView):
     login_url = "/admin/login/"
     model = MenuHeladeria
+
+    def form_invalid(self, form):
+        print(form.errors)
+        response = super().form_invalid(form)
+        return response
 
 
 class FlavourView(FilteredSingleTableView):

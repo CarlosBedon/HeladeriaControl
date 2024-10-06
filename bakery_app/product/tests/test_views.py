@@ -28,7 +28,6 @@ def test_create_products__logged(admin_user, rf, params_menu_products):
     response = ProductCreate.as_view()(request)
     assert response.status_code == 204
     assert MenuHeladeria.objects.count() == 1
-    # assert products_started.count() + 1 == products_after_create.count()
 
 
 @pytest.mark.django_db
@@ -96,25 +95,23 @@ def test_update_products__update_data(admin_user, rf, one_product_create):
 def test_delete_products_views(client, admin_user, products_create, django_user_model):
     user = django_user_model.objects.create_user(email="Carlos@gmail.com", password="12345678", is_staff=True)
     client.login(username=user.email, password="12345678")
-    product = ProductosMenu.objects.first()
+    product = MenuHeladeria.objects.first()
     response = client.get(reverse("product:delete", kwargs={"pk": product.pk}))
     assert response.status_code == 200
-    assert "Eliminar Producto" in str(response.content)
+    assert "ELIMINAR PRODUCTO" in str(response.content)
     assert "Estas Seguro de eliminar" in str(response.content)
 
 
 @pytest.mark.django_db
 def test_delete_product(admin_user, rf, products_create):
-    data = ProductosMenu.objects.first()
-    products_founded = ProductosMenu.objects.all()
-    inicial_products = products_founded.count()
-    request = rf.post(reverse("product:delete", kwargs={"pk": data.pk}))
+    inicial_count = MenuHeladeria.objects.count()
+    product = MenuHeladeria.objects.first()
+    request = rf.post("product:delete", kwargs={"pk": product.pk})
     request.user = admin_user
-    response = ProductDelete.as_view()(request, pk=data.pk)
-    products_founded_after_delete = ProductosMenu.objects.all()
-    assert response.status_code == 302
-    assert response.url == "/product/?deleted"
-    assert inicial_products > products_founded_after_delete.count()
+    response = ProductDelete.as_view()(request, pk=product.pk)
+    assert response.status_code == 204
+    after_delete = MenuHeladeria.objects.count()
+    assert inicial_count - 1 == after_delete
 
 
 @pytest.mark.django_db
