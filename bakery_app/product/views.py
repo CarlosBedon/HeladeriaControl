@@ -13,6 +13,18 @@ from .models import FlavoursIceCream, MenuHeladeria
 from .tables import FlavoursTable, ProductTable
 
 
+class SaveMixin:
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
+
+
+class DeleteMixin:
+    def form_valid(self, form):
+        self.object.delete()
+        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
+
+
 class FilteredSingleTableView(SingleTableMixin, FilterView):
     formhelper_class = None
 
@@ -38,19 +50,20 @@ class ProductView(FilteredSingleTableView):
         return template_name
 
 
-class ProductCreate(LoginRequiredMixin, CreateView):
+class ProductCreate(LoginRequiredMixin, SaveMixin, CreateView):
     login_url = "/admin/login/"
     model = MenuHeladeria
     form_class = ProductForm
-    success_url = reverse_lazy("product:product")
 
-    def form_valid(self, form):
-        form.save()
-        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
+    def form_invalid(self, form):
+        print(form.errors)
+        response = super().form_invalid(form)
+        return response
 
 
 class ProductUpdate(
     LoginRequiredMixin,
+    SaveMixin,
     UpdateView,
 ):
     login_url = "/admin/login/"
@@ -59,17 +72,15 @@ class ProductUpdate(
     form_class = ProductForm
     template_name_suffix = "_update_form"
 
-    def form_valid(self, form):
-        form.save()
-        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
+    def form_invalid(self, form):
+        print(form.errors)
+        response = super().form_invalid(form)
+        return response
 
 
-class ProductDelete(LoginRequiredMixin, DeleteView):
+class ProductDelete(DeleteMixin, DeleteView):
     login_url = "/admin/login/"
     model = MenuHeladeria
-
-    def form_valid(self, form):
-        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
 
 class FlavourView(FilteredSingleTableView):
@@ -87,30 +98,20 @@ class FlavourView(FilteredSingleTableView):
         return template_name
 
 
-class FlavourCreate(LoginRequiredMixin, CreateView):
+class FlavourCreate(LoginRequiredMixin, SaveMixin, CreateView):
     login_url = "/admin/login/"
     model = FlavoursIceCream
     form_class = FlavourForm
     success_url = reverse_lazy("product:flavour")
 
-    def form_valid(self, form):
-        form.save()
-        return HttpResponse(status=204, headers={"HX-Trigger": json.dumps({"update_table": None})})
 
-
-class FlavourUpdate(LoginRequiredMixin, UpdateView):
+class FlavourUpdate(LoginRequiredMixin, SaveMixin, UpdateView):
     login_url = "/admin/login/"
     model = FlavoursIceCream
     form_class = FlavourForm
     template_name_suffix = "_update_form"
 
-    def get_success_url(self):
-        return reverse_lazy("product:flavour") + "?ok"
 
-
-class FlavourDelete(LoginRequiredMixin, DeleteView):
+class FlavourDelete(LoginRequiredMixin, DeleteMixin, DeleteView):
     login_url = "/admin/login/"
     model = FlavoursIceCream
-
-    def get_success_url(self):
-        return reverse_lazy("product:flavour") + "?deleted"

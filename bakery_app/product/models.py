@@ -5,14 +5,7 @@ from django.db import models
 
 
 class ProductosMenu(models.Model):
-    MENU_PRODUCTS_CHOICES = (
-        ("cono simple", "Cono Simple"),
-        ("cono doble", "Cono Doble"),
-        ("tulipan simple", "Tulipan Simple"),
-        ("tulipan doble", "Tulipan Doble"),
-    )
-
-    productos_menu = models.CharField(max_length=50, unique=True, choices=MENU_PRODUCTS_CHOICES)
+    productos_menu = models.CharField(max_length=50, unique=True)
 
     class Meta:
         verbose_name = "Menu Producto"
@@ -47,13 +40,7 @@ class MenuHeladeria(models.Model):
 
 
 class FlavourName(models.Model):
-    FLAVOURS_CHOICES = (
-        ("mora", "Mora"),
-        ("maracuya", "Maracuya"),
-        ("chocolate", "Chocolate"),
-        ("vainilla", "Vainilla"),
-    )
-    flavour_name = models.CharField(max_length=50, unique=True, choices=FLAVOURS_CHOICES)
+    flavour_name = models.CharField(max_length=50, unique=True)
 
     class Meta:
         verbose_name = "Sabor Helado"

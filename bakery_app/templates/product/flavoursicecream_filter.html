@@ -22,10 +22,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <button class="btn btn-success"
-          type="button"
-          hx-get="{% url 'product:create' %}"
-          hx-target="#dialog">Crear Producto</button>
   <button class="btn btn-success "
           type="button"
           hx-get="{% url 'product:flavourCreate' %}"

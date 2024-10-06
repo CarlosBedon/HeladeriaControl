@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Column, Layout, Row, Submit
+from crispy_forms.layout import Column, Field, Layout, Row, Submit
 from django import forms
 
 from .models import FlavoursIceCream, MenuHeladeria
@@ -19,7 +19,7 @@ class ProductForm(forms.ModelForm):
         self.helper.layout = Layout(
             "productos_menu",
             Row(
-                Column("peso_en_helado", css_class="form-group col-md-6 mb-0"),
+                Column(Field("peso_en_helado"), css_class="form-group col-md-6 mb-0"),
                 Column("precio", css_class="form-group col-md-6 mb-0"),
                 css_class="form-row",
             ),

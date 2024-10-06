@@ -13,7 +13,10 @@ class ProductTable(Table):
     updated = Column()
     button_edit = TemplateColumn(template_name="product/edit_buttons.html", verbose_name=("Editar"), orderable=False)
     button_delete = TemplateColumn(
-        template_name="product/delete_buttons.html", verbose_name=("Eliminar"), orderable=False
+        template_name="product/delete_buttons.html",
+        extra_context={"delete_url": "product:delete"},
+        verbose_name=("Eliminar"),
+        orderable=False,
     )
 
     class Meta:
@@ -32,7 +35,10 @@ class FlavoursTable(Table):
         template_name="product/edit_buttons_flavour.html", verbose_name=("Editar"), orderable=False
     )
     button_delete = TemplateColumn(
-        template_name="product/delete_buttons_flavour.html", verbose_name=("Eliminar"), orderable=False
+        template_name="product/delete_buttons.html",
+        extra_context={"delete_url": "product:flavourDelete"},
+        verbose_name=("Eliminar"),
+        orderable=False,
     )
 
     class Meta:

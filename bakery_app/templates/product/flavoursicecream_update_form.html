@@ -4,17 +4,15 @@
   {% csrf_token %}
   <div class="modal-content">
     <div class="modal-header">
-      <h4>Agrega el Sabor de Helado</h4>
+      <h4>Editar el Producto al Menu</h4>
     </div>
     <div class="modal-body">
-      <form method="post" hx-post="{% url 'product:flavourCreate' record.pk %}">
+      <form hx-post="{% url 'product:flavourUpdate' object.pk %}">
         {% crispy form %}
       </form>
     </div>
     <div class="modal-footer">
-      <a href="{% url 'product:flavour' %}">
-        <button class="btn ">Cancelar</button>
-      </a>
+      <button class="btn" data-bs-dismiss="modal">Cancelar</button>
     </div>
   </div>
 {% endblock content %}

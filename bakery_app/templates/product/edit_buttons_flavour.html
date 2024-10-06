@@ -1,4 +1,5 @@
-<a href="{% url 'product:flavourUpdate' record.pk %}">
+<a hx-get="{% url 'product:flavourUpdate' record.pk %}"
+   hx-target="#dialog">
   <button class="btn btn-warning">
     <b>Editar</b>
   </button>
